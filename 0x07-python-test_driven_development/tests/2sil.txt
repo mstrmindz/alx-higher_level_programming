@@ -1,0 +1,27 @@
+Tests for dividing matrix
+>>> module = __import__('2sil')
+>>> div_mat = module.matrix_divided
+>>> len(module.__doc__) > 1
+True
+>>> len(div_mat.__doc__) > 1
+True
+>>> div_mat([], 2)
+Traceback (most recent call last):
+...
+TypeError: matrix must be a matrix (list of lists) of integers/floats
+>>> div_mat([[]], 2)
+Traceback (most recent call last):
+...
+TypeError: matrix must be a matrix (list of lists) of integers/floats
+>>> div_mat([[2, 3], [4, 5, 6]], 2)
+Traceback (most recent call last):
+...
+TypeError: Each row of the matrix must have the same size
+>>> div_mat([[2, 3, 'school']], 2)
+Traceback (most recent call last):
+...
+TypeError: matrix must be a matrix (list of lists) of integers/floats
+>>> div_mat([[2, 3, 'school'], [4, 5, 6]], 2)
+Traceback (most recent call last):
+...
+TypeError: matrix must be a matrix (list of lists) of integers/floats
