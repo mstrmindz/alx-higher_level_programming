@@ -1,19 +1,19 @@
 #!/usr/bin/python3
-"""filter states from users input on the command arg"""
+"""Lists states"""
 
-import sys
-from db_conn import connect_db
-
-_args = sys.argv
+import MySQLdb
+from sys import argv
 
 if __name__ == "__main__":
-    sql_query = """SELECT * FROM states WHERE name = %s ORDER BY id ASC"""
-    user_input = _args[-1:]
-    db = connect_db(_args[1:4])
-    cur = db.cursor()
-    cur.execute(sql_query, (user_input,))
-    rows = cur.fetchall()
-    for row in rows:
+    conn = MySQLdb.connect(host="localhost", port=3306, user=argv[1],
+                           passwd=argv[2], db=argv[3], charset="utf8")
+    cur = conn.cursor()
+    query = """
+SELECT * FROM states WHERE name LIKE BINARY '{}' ORDER BY states.id ASC"""
+    query = query.format(argv[4])
+    cur.execute(query)
+    query_rows = cur.fetchall()
+    for row in query_rows:
         print(row)
     cur.close()
-    db.close()
+    conn.close()
